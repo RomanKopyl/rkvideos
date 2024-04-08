@@ -1,12 +1,13 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import { DATA } from '../../constants';
+import { ConfigContext, ContinueVideoContext } from '../../navigation/RootNavigator';
 import { BannerView } from './bannerView';
 import { ContinueWatchingView } from './continueWatchingView';
 import { HomeHeader } from './homeHeader';
 import { SectionView } from './sectionView';
-import { ConfigContext } from '../../navigation/RootNavigator';
+import { useAppSelector } from '../../hooks';
 
 
 export const HomeScreen: React.FC = () => {
@@ -16,7 +17,7 @@ export const HomeScreen: React.FC = () => {
   };
 
   const config = useContext(ConfigContext);
-  console.log('CONFIG', config);
+  const { showContinue } = useAppSelector(state => state.main);
 
 
   return (
@@ -38,7 +39,7 @@ export const HomeScreen: React.FC = () => {
                 />
               )
             }
-            else if (item.type === 'continue') {
+            else if (item.type === 'continue' && showContinue) {
               return (
                 <ContinueWatchingView
                   key={index}
@@ -65,7 +66,8 @@ export const HomeScreen: React.FC = () => {
             }
           })
         }
-        <View style={{ height: 50 }}></View>
+
+        <View style={styles.bottom}></View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -75,4 +77,7 @@ const styles = StyleSheet.create({
   gap: {
     marginTop: 24,
   },
+  bottom: {
+    height: 50,
+  }
 });

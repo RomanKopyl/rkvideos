@@ -1,10 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CONTINUE_WATCHING_VIDEO } from "../constants";
+import { ContinueVideo } from "../data/interfaces";
 
-export interface ContinueVideo {
-    videoId: string,
-    time: number
-}
 
 export const saveToAsyncStorage = async (videoId: string, time: number) => {
     // save video id and time of stop

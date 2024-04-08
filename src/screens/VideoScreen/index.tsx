@@ -8,6 +8,8 @@ import { getCurrentVideoFromAsyncStorage, saveToAsyncStorage } from '../../utils
 import { showError } from '../../utils/helper';
 import { BottomControl } from './bottomControl';
 import { Header } from './header';
+import { useAppDispatch } from '../../hooks';
+import { setContinueVideo } from '../../store/main';
 
 
 export const VideoScreen: React.FC = ({ route }) => {
@@ -16,6 +18,7 @@ export const VideoScreen: React.FC = ({ route }) => {
     backgroundColor: Colors.darker,
     flex: 1,
   };
+  const dispatch = useAppDispatch();
 
   const [loading, setLoading] = useState(true);
   const [videos, setVideos] = useState<VideoData[] | undefined>();
@@ -75,11 +78,15 @@ export const VideoScreen: React.FC = ({ route }) => {
   };
 
   const closeVideo = () => {
-    const videoId = videos?.[currentVideo]?.id;
     console.log("CLOSE", currentTime, videos?.[currentVideo]);
 
+    const videoId = videos?.[currentVideo]?.id;
     if (!videoId) return;
-    saveToAsyncStorage(videoId, currentTime);
+
+    dispatch(setContinueVideo({
+      videoId,
+      time: currentTime,
+    }));
   }
 
   const onVideoEnd = () => {

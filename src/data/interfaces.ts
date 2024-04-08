@@ -36,3 +36,8 @@ export interface Config {
         title?: string
     }[]
 }
+
+export interface ContinueVideo {
+    videoId: string,
+    time: number
+}
