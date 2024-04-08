@@ -2,23 +2,18 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { ContinueWatching } from '../../data/interfaces';
 import { Routes } from '../../navigation/routes.types';
 
-
-const CURRENT_VIDEO = {
-  poster: require('../../images/currentMoviePoser.png'),
-  title: 'Boss With Benefits',
-  subTitle: 'Kelly Nite',
-}
 
 interface Props {
   style?: ViewStyle,
   title?: string,
-  // list?: Banner[],
+  data?: ContinueWatching,
 }
 
 export const ContinueWatchingView: React.FC<Props> = (props) => {
-  const { style = [], title } = props;
+  const { style = [], title, data } = props;
 
   const navigation = useNavigation();
 
@@ -42,18 +37,18 @@ export const ContinueWatchingView: React.FC<Props> = (props) => {
         }}
       >
         <Image
-          source={CURRENT_VIDEO.poster}
+          source={data?.poster}
           style={styles.poster}
         />
         <View style={styles.textContainer}>
           <Text style={styles.title}>
             {
-              CURRENT_VIDEO.title
+              data?.title
             }
           </Text>
           <Text style={styles.subTitle}>
             {
-              CURRENT_VIDEO.subTitle
+              data?.subTitle
             }
           </Text>
         </View>

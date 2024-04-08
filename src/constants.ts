@@ -31,11 +31,11 @@ export const DATA = {
     continue: {
         type: 'continue',
         title: 'Continue Watching',
-        // data: {
-        //     poster: require('./images/currentMoviePoser.png'),
-        //     title: 'Boss With Benefits',
-        //     subTitle: 'Kelly Nite',
-        // },
+        continueData: {
+            poster: require('./images/currentMoviePoster.png'),
+            title: 'Boss With Benefits',
+            subTitle: 'Kelly Nite',
+        },
     },
     trendingNow: {
         type: 'section',

@@ -44,7 +44,7 @@ export const HomeScreen: React.FC = () => {
                   key={index}
                   style={styles.gap}
                   title={item?.title}
-                // list={item?.data}
+                  data={DATA.continue.continueData}
                 />
               )
             }

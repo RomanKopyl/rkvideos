@@ -20,13 +20,14 @@ export interface Banner {
     genre?: string
 }
 
+export interface ContinueWatching {
+    poster: ImageSourcePropType
+    title: string
+    subTitle: string
+}
+
 export type DataType = 'banner' | 'section' | 'continue';
 export type SectionType = 'trendingNow' | 'topRomance';
-
-// export interface PartData  {
-//     type?: DataType
-//     title?: string
-// }
 
 export interface Config {
     data?: {
