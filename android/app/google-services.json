@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "634257372475",
+    "project_id": "rkvideos-91f5a",
+    "storage_bucket": "rkvideos-91f5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634257372475:android:aa4b9c75cced2acc52331e",
+        "android_client_info": {
+          "package_name": "com.rkvideos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDvlU90ZHYmQdlKYmLuToNmPiU6XymY84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
