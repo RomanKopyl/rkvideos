@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Poster } from '../../data/interfaces';
-import { Routes } from '../../navigation/routes.types';
+import { StackNavigation } from '../../navigation/RootNavigator';
 
 
 interface Props {
@@ -14,12 +14,12 @@ export const SectionItem: React.FC<Props> = (props) => {
   const {
     item,
   } = props;
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigation>();
 
   const onPress = () => {
     if (item?.message) return;
     
-    navigation.navigate(Routes.VideoScreen as never)
+    navigation.navigate('VideoScreen');
   };
 
   return (

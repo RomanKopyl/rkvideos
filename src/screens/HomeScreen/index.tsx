@@ -1,13 +1,13 @@
 
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import { DATA } from '../../constants';
-import { ConfigContext, ContinueVideoContext } from '../../navigation/RootNavigator';
+import { useAppSelector } from '../../hooks';
+import { ConfigContext } from '../../navigation/RootNavigator';
 import { BannerView } from './bannerView';
 import { ContinueWatchingView } from './continueWatchingView';
 import { HomeHeader } from './homeHeader';
 import { SectionView } from './sectionView';
-import { useAppSelector } from '../../hooks';
 
 
 export const HomeScreen: React.FC = () => {

@@ -4,15 +4,18 @@ import { ActivityIndicator, SafeAreaView, StyleSheet, View } from 'react-native'
 import Video, { OnProgressData, OnSeekData } from 'react-native-video';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { VideoData } from '../../data/interfaces';
-import { getCurrentVideoFromAsyncStorage, saveToAsyncStorage } from '../../utils/asyncStorageHelper';
+import { useAppDispatch } from '../../hooks';
+import { setContinueVideo } from '../../store/main';
+import { getCurrentVideoFromAsyncStorage } from '../../utils/asyncStorageHelper';
 import { showError } from '../../utils/helper';
 import { BottomControl } from './bottomControl';
 import { Header } from './header';
-import { useAppDispatch } from '../../hooks';
-import { setContinueVideo } from '../../store/main';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/RootNavigator';
 
+type Props = NativeStackScreenProps<RootStackParamList, 'VideoScreen'>;
 
-export const VideoScreen: React.FC = ({ route }) => {
+export const VideoScreen: React.FC<Props> = ({ route }) => {
   const isContinueExist = route?.params?.isContinueExist ?? false;
   const backgroundStyle = {
     backgroundColor: Colors.darker,

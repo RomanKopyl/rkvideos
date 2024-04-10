@@ -6,14 +6,12 @@ import { gradientDataTop } from '../../constants';
 
 interface Props {
   title?: string
-  showBack?: boolean
   onPress?: () => void
 }
 
 export const Header: React.FC<Props> = (props) => {
   const {
     title,
-    showBack = true,
     onPress,
   } = props;
 

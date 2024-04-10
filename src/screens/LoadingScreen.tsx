@@ -1,16 +1,17 @@
 
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { ActivityIndicator, SafeAreaView, StyleSheet } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { Routes } from '../navigation/routes.types';
+import { StackNavigation } from '../navigation/RootNavigator';
 
 
-export const LoadingScreen: React.FC = ({ navigation }) => {
+
+export const LoadingScreen: React.FC = () => {
+  const navigation = useNavigation<StackNavigation>();
 
   useEffect(() => {
-    setTimeout(() => {
-      navigation.replace(Routes.HomeScreen as never);
-    }, 1000);
+    navigation.replace('HomeScreen');
   }, [])
 
 

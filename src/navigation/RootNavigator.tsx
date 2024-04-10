@@ -1,5 +1,5 @@
 import remoteConfig from '@react-native-firebase/remote-config';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { createContext, useEffect, useState } from 'react';
 import { HOME_SCREEN_CONFIG } from '../constants';
@@ -11,9 +11,18 @@ import { VideoScreen } from '../screens/VideoScreen';
 import { setContinueVideo } from '../store/main';
 import { getCurrentVideoFromAsyncStorage } from '../utils/asyncStorageHelper';
 import { showError } from '../utils/helper';
-import { Routes } from './routes.types';
 
-const Stack = createNativeStackNavigator();
+
+export type RootStackParamList = {
+    LoadingScreen: undefined,
+    WelcomeScreen: undefined,
+    HomeScreen: undefined,
+    VideoScreen: { isContinueExist: boolean } | undefined,
+};
+export type StackNavigation = NativeStackNavigationProp<RootStackParamList>;
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
 export const ConfigContext = createContext<Config | null>(null);
 
 export const RootNavigator: React.FC = () => {
@@ -37,7 +46,7 @@ export const RootNavigator: React.FC = () => {
         getCurrentVideoFromAsyncStorage()
             .then(res => {
                 console.log('RES', res);
-                
+
                 if (!res) return;
 
                 dispatch(setContinueVideo(res));
@@ -46,19 +55,19 @@ export const RootNavigator: React.FC = () => {
 
     return (
         <ConfigContext.Provider value={config}>
-            <Stack.Navigator initialRouteName={Routes.LoadingScreen}>
+            <Stack.Navigator initialRouteName={'LoadingScreen'}>
                 <Stack.Screen
-                    name={Routes.LoadingScreen}
+                    name={'LoadingScreen'}
                     component={LoadingScreen}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
-                    name={Routes.HomeScreen}
+                    name={'HomeScreen'}
                     component={HomeScreen}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
-                    name={Routes.VideoScreen}
+                    name={'VideoScreen'}
                     component={VideoScreen}
                     options={{ headerShown: false }}
                 />

@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Banner } from '../../data/interfaces';
-import { Routes } from '../../navigation/routes.types';
+import { StackNavigation } from '../../navigation/RootNavigator';
 
 
 interface Props {
@@ -14,12 +14,12 @@ export const BannerItem: React.FC<Props> = (props) => {
   const {
     item,
   } = props;
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigation>();
 
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate(Routes.VideoScreen as never)}
+      onPress={() => navigation.navigate('VideoScreen')}
     >
       {
         item?.imageUrl &&

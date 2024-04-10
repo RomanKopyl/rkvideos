@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { ContinueWatching } from '../../data/interfaces';
-import { Routes } from '../../navigation/routes.types';
+import { StackNavigation } from '../../navigation/RootNavigator';
 
 
 interface Props {
@@ -15,7 +15,14 @@ interface Props {
 export const ContinueWatchingView: React.FC<Props> = (props) => {
   const { style = [], title, data } = props;
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigation>();
+
+  const onPressToVideo = () => {
+    navigation.navigate({
+      name: 'VideoScreen',
+      params: { isContinueExist: true },
+    } as never);
+  }
 
   return (
     <View style={{ ...styles.container, ...style }}>
@@ -29,12 +36,7 @@ export const ContinueWatchingView: React.FC<Props> = (props) => {
 
       <TouchableOpacity
         style={styles.dataContainer}
-        onPress={() => {
-          navigation.navigate({
-            name: Routes.VideoScreen,
-            params: { isContinueExist: true },
-          } as never);
-        }}
+        onPress={onPressToVideo}
       >
         <Image
           source={data?.poster}
