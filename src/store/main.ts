@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ContinueVideo } from '../data/interfaces';
-import { saveToAsyncStorage } from '../utils/asyncStorageHelper';
+import { saveCurrentVideoToStorage } from '../utils/storageHelper';
 
 
 interface InitStateInterface {
@@ -22,7 +22,7 @@ const mainSlice = createSlice({
             state.continueVideo = action.payload;
 
             if (action.payload?.videoId) {
-                saveToAsyncStorage(action.payload?.videoId, action.payload?.time);
+                saveCurrentVideoToStorage(action.payload?.videoId, action.payload?.time);
                 state.showContinue = true;
             }
         },

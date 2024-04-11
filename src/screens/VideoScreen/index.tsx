@@ -1,17 +1,17 @@
 import firestore from '@react-native-firebase/firestore';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, SafeAreaView, StyleSheet, View } from 'react-native';
 import Video, { OnProgressData, OnSeekData } from 'react-native-video';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { VideoData } from '../../data/interfaces';
 import { useAppDispatch } from '../../hooks';
+import { RootStackParamList } from '../../navigation/RootNavigator';
 import { setContinueVideo } from '../../store/main';
-import { getCurrentVideoFromAsyncStorage } from '../../utils/asyncStorageHelper';
 import { showError } from '../../utils/helper';
+import { getCurrentVideoFromStorage } from '../../utils/storageHelper';
 import { BottomControl } from './bottomControl';
 import { Header } from './header';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../navigation/RootNavigator';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'VideoScreen'>;
 
@@ -56,7 +56,7 @@ export const VideoScreen: React.FC<Props> = ({ route }) => {
 
         // if route from continue button
         if (isContinueExist) {
-          getCurrentVideoFromAsyncStorage()
+          getCurrentVideoFromStorage()
             .then(current => {
               if (!current) return;
               const index = tempArray.findIndex(item => item.id === current?.videoId);
@@ -169,7 +169,7 @@ export const VideoScreen: React.FC<Props> = ({ route }) => {
 };
 
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   backgroundVideo: {
     position: 'absolute',
     top: 0,

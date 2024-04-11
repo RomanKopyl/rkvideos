@@ -70,18 +70,10 @@ export const BottomControl: React.FC<Props> = (props) => {
                     justifyContent: 'space-between',
                     marginTop: -10,
                 }}>
-                    <Text style={{
-                        fontSize: 11,
-                        lineHeight: 14,
-                        color: 'white'
-                    }}>
+                    <Text style={styles.text}>
                         {convertToTime(currentTime)}
                     </Text>
-                    <Text style={{
-                        fontSize: 11,
-                        lineHeight: 14,
-                        color: 'white'
-                    }}>
+                    <Text style={styles.text}>
                         {convertToTime(endTime)}
                     </Text>
                 </View>
@@ -91,7 +83,7 @@ export const BottomControl: React.FC<Props> = (props) => {
 };
 
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
     linearGradient: {
         height: 81,
         position: 'absolute',
@@ -111,5 +103,10 @@ var styles = StyleSheet.create({
     track: {
         height: 3,
         backgroundColor: '#FFFFFF32'
-    }
+    },
+    text: {
+        fontSize: 11,
+        lineHeight: 14,
+        color: 'white'
+    },
 });

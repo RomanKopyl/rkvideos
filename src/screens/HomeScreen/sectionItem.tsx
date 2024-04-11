@@ -18,7 +18,7 @@ export const SectionItem: React.FC<Props> = (props) => {
 
   const onPress = () => {
     if (item?.message) return;
-    
+
     navigation.navigate('VideoScreen');
   };
 
