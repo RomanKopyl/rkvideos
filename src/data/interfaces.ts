@@ -6,7 +6,7 @@ export interface VideoData {
     videoUrl?: string
 }
 
-export interface Poster {
+export interface Section {
     id?: string
     title?: string
     imageUrl?: ImageSourcePropType

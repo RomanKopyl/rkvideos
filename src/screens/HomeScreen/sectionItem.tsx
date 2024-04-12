@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Poster } from '../../data/interfaces';
+import { Section } from '../../data/interfaces';
 import { StackNavigation } from '../../navigation/RootNavigator';
 
 
 interface Props {
-  item: Poster,
+  item: Section,
 }
 
 

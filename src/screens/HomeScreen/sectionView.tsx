@@ -1,41 +1,41 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, ViewStyle } from 'react-native';
-import { Poster } from '../../data/interfaces';
+import { FlatList, StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { Section } from '../../data/interfaces';
 import { SectionItem } from './sectionItem';
 
 interface Props {
   style?: ViewStyle,
   title?: string,
-  list?: Poster[],
+  list?: Section[],
 }
 
 export const SectionView: React.FC<Props> = (props) => {
-  const { style = [], title, list } = props;
+  const {
+    style = [],
+    title,
+    list
+  } = props;
+
+  const renderItem = ({ item, index }: { item: Section, index: number }) => (
+    <SectionItem
+      key={index.toString()}
+      item={item}
+    />
+  );
 
   return (
     <View style={{ ...styles.container, ...(style ?? []) }}>
       <Text style={styles.title}>
         {title}
       </Text>
-      <ScrollView
-        style={{ marginTop: 12 }}
-        horizontal={true}
-      >
 
-        {/* Pagination left block */}
-        <View style={{ width: 16, backgroundColor: 'transparent' }}></View>
-        {
-          // TODO: to Flatlist + pagination
-          list && list.map((item, index) => {
-            return (
-              <SectionItem
-                key={index.toString()}
-                item={item}
-              />
-            )
-          })
-        }
-      </ScrollView>
+      <FlatList
+        horizontal
+        style={{ ...styles.container, ...style }}
+        data={list}
+        renderItem={renderItem}
+        ListHeaderComponent={<View style={styles.headerComponent}></View>}
+      />
     </View>
 
   );
@@ -44,14 +44,17 @@ export const SectionView: React.FC<Props> = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+    marginTop: 12,
+  },
+  headerComponent: {
+    width: 16,
+    backgroundColor: 'transparent',
   },
   title: {
     fontSize: 20,
     color: 'white',
     lineHeight: 24,
     fontWeight: '700',
-    // fontFamily: Nani TODO:
     paddingLeft: 16,
   },
 });
