@@ -38,8 +38,9 @@ export const RootNavigator: React.FC = () => {
             .then(() => {
                 const parameters = remoteConfig().getValue(HOME_SCREEN_CONFIG);
 
-                console.log('HOME_SCREEN_CONFIG', parameters);
-                setConfig(JSON.parse(parameters.asString()));
+                const jsonParam = JSON.parse(parameters.asString());
+                setConfig(jsonParam);
+                console.log('HOME_SCREEN_CONFIG', jsonParam);
             })
             .catch(error => showError(error));
     }, []);

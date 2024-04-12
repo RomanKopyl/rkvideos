@@ -29,12 +29,14 @@ export interface ContinueWatching {
 export type DataType = 'banner' | 'section' | 'continue';
 export type SectionType = 'trendingNow' | 'topRomance';
 
+export interface DataConfig {
+    type?: DataType
+    subType?: SectionType
+    title?: string
+}
+
 export interface Config {
-    data?: {
-        type?: DataType
-        subType?: SectionType
-        title?: string
-    }[]
+    data?: DataConfig[]
 }
 
 export interface ContinueVideo {

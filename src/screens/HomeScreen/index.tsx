@@ -1,7 +1,8 @@
 
 import React, { useContext } from 'react';
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import { FlatList, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import { DATA } from '../../constants';
+import { DataConfig } from '../../data/interfaces';
 import { useAppSelector } from '../../hooks';
 import { ConfigContext } from '../../navigation/RootNavigator';
 import { BannerView } from './bannerView';
@@ -20,6 +21,44 @@ export const HomeScreen: React.FC = () => {
   const { showContinue } = useAppSelector(state => state.main);
 
 
+  const renderItem = ({ item, index }: { item: DataConfig, index: number }) => {
+    switch (item.type) {
+      case 'banner':
+        return (
+          <BannerView
+            key={index}
+            style={styles.gap}
+            list={DATA.banner.data}
+          />
+        )
+
+      case 'continue':
+        if (!showContinue) return <></>;
+        return (
+          <ContinueWatchingView
+            key={index}
+            style={styles.gap}
+            title={item?.title}
+            data={DATA.continue.continueData}
+          />
+        )
+
+      case 'section':
+        if (!item?.subType) return <></>;
+        return (
+          <SectionView
+            key={index}
+            style={styles.gap}
+            title={DATA[item?.subType].title}
+            list={DATA[item?.subType].data}
+          />
+        );
+
+      default:
+        return <></>;
+    }
+  };
+
   return (
     <SafeAreaView style={{ ...backgroundStyle }}>
 
@@ -27,48 +66,11 @@ export const HomeScreen: React.FC = () => {
 
       <HomeHeader />
 
-      <ScrollView>
-        {
-          config?.data && config?.data?.map((item, index) => {
-            if (item.type === 'banner') {
-              return (
-                <BannerView
-                  key={index}
-                  style={styles.gap}
-                  list={DATA.banner.data}
-                />
-              )
-            }
-            else if (item.type === 'continue' && showContinue) {
-              return (
-                <ContinueWatchingView
-                  key={index}
-                  style={styles.gap}
-                  title={item?.title}
-                  data={DATA.continue.continueData}
-                />
-              )
-            }
-            else if (item.type === 'section') {
-              if (!item?.subType) return;
+      <FlatList
+        data={config?.data}
+        renderItem={renderItem}
+      />
 
-              const title = DATA[item?.subType].title;
-              const list = DATA[item?.subType].data;
-
-              return (
-                <SectionView
-                  key={index}
-                  style={styles.gap}
-                  title={title}
-                  list={list}
-                />
-              );
-            }
-          })
-        }
-
-        <View style={styles.bottom}></View>
-      </ScrollView>
     </SafeAreaView>
   );
 };
